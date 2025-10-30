@@ -1,0 +1,93 @@
+{
+  "name": "hello-fhevm-tutorial",
+  "version": "1.0.0",
+  "description": "Hello FHEVM Tutorial - The most beginner-friendly guide to building confidential dApps with Zama's Fully Homomorphic Encryption",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "start": "npm run dev",
+    "deploy": "npm run build && npx serve dist",
+    "test": "echo \"Visit http://localhost:3000 to test the dApp\" && npm run dev"
+  },
+  "dependencies": {
+    "ethers": "^6.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web3": "^4.5.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@nomicfoundation/hardhat-verify": "^2.1.2",
+    "@openzeppelin/contracts": "^5.4.0",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "dotenv": "^17.2.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "hardhat": "^2.26.4",
+    "hardhat-gas-reporter": "^2.3.0",
+    "solidity-coverage": "^0.8.16",
+    "terser": "^5.44.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  },
+  "keywords": [
+    "fhevm",
+    "fhe",
+    "zama",
+    "tutorial",
+    "beginner",
+    "blockchain",
+    "privacy",
+    "encryption",
+    "confidential",
+    "dapp",
+    "ethereum",
+    "solidity",
+    "react",
+    "web3",
+    "smart-contracts",
+    "employee-survey",
+    "anonymous",
+    "homomorphic-encryption"
+  ],
+  "author": {
+    "name": "FHEVM Tutorial Team",
+    "email": "hello@fhevm-tutorial.com",
+    "url": "https://github.com/hello-fhevm-tutorial"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hello-fhevm-tutorial/employee-privacy-survey.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hello-fhevm-tutorial/employee-privacy-survey/issues"
+  },
+  "homepage": "https://hello-fhevm-tutorial.github.io/employee-privacy-survey",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
