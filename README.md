@@ -6,6 +6,20 @@ A privacy-preserving employee satisfaction survey platform built with Fully Homo
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue)](https://soliditylang.org/)
 [![Hardhat](https://img.shields.io/badge/Hardhat-Development-orange)](https://hardhat.org/)
 
+## 🚀 Live Application
+
+**🌐 Website**: [https://fhe-employee-privacy.vercel.app/](https://fhe-employee-privacy.vercel.app/)
+
+## 📋 Smart Contract Information
+
+- **Contract Address**: `0x32db9e03494b45a0b2b2B85Cfb767CD65B49275A`
+- **Network**: Sepolia Ethereum Testnet
+- **Explorer**: [View on Etherscan](https://sepolia.etherscan.io/address/0x32db9e03494b45a0b2b2B85Cfb767CD65B49275A)
+
+## 🎥 Demo Video
+
+[Watch the complete walkthrough of the Employee Privacy FHE platform demo.mp4]
+
 ## Overview
 
 This platform enables organizations to conduct completely anonymous employee satisfaction surveys where individual responses are encrypted using Fully Homomorphic Encryption. Only aggregated statistics can be revealed, ensuring complete privacy protection for survey participants.
