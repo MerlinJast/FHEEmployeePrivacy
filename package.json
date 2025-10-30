@@ -1,0 +1,108 @@
+{
+  "name": "employee-privacy-survey",
+  "version": "1.0.0",
+  "description": "Privacy-preserving employee satisfaction survey platform using Fully Homomorphic Encryption and Hardhat",
+  "main": "hardhat.config.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "verify:sepolia": "hardhat run scripts/verify.js --network sepolia",
+    "interact:local": "hardhat run scripts/interact.js --network localhost",
+    "interact:sepolia": "hardhat run scripts/interact.js --network sepolia",
+    "simulate": "hardhat run scripts/simulate.js --network localhost",
+    "clean": "hardhat clean",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "npm run lint:sol && npm run prettier:check",
+    "lint:sol": "solhint \"contracts/**/*.sol\"",
+    "lint:js": "eslint . --ext .js,.ts",
+    "prettier": "prettier --write \"**/*.{js,json,md,sol,ts}\"",
+    "prettier:check": "prettier --check \"**/*.{js,json,md,sol,ts}\"",
+    "prettier:sol": "prettier --write \"contracts/**/*.sol\"",
+    "prepare": "husky",
+    "security": "npm run lint:sol && npm audit",
+    "optimize": "REPORT_GAS=true npm test",
+    "size": "hardhat size-contracts"
+  },
+  "dependencies": {
+    "@fhevm/solidity": "^0.8.0",
+    "@zama-fhe/oracle-solidity": "^0.2.0",
+    "ethers": "^6.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web3": "^4.5.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@nomicfoundation/hardhat-verify": "^2.1.2",
+    "@openzeppelin/contracts": "^5.4.0",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "dotenv": "^17.2.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "hardhat": "^2.26.4",
+    "hardhat-gas-reporter": "^2.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-solidity": "^2.1.0",
+    "solhint": "^6.0.1",
+    "solidity-coverage": "^0.8.16",
+    "terser": "^5.44.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  },
+  "keywords": [
+    "hardhat",
+    "ethereum",
+    "smart-contracts",
+    "solidity",
+    "fhevm",
+    "fhe",
+    "zama",
+    "privacy",
+    "encryption",
+    "employee-survey",
+    "anonymous",
+    "blockchain",
+    "web3",
+    "sepolia"
+  ],
+  "author": "Privacy Survey Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/employee-privacy-survey.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hello-fhevm-tutorial/employee-privacy-survey/issues"
+  },
+  "homepage": "https://hello-fhevm-tutorial.github.io/employee-privacy-survey",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
