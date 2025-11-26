@@ -1,10 +1,11 @@
 # Employee Privacy Survey Platform
 
-A privacy-preserving employee satisfaction survey platform built with Fully Homomorphic Encryption (FHE) on Ethereum using Zama's fhEVM technology and Hardhat development framework.
+A production-ready, privacy-preserving employee satisfaction survey platform built with Fully Homomorphic Encryption (FHE) on Ethereum using Zama's fhEVM technology. Features innovative refund mechanisms, timeout protection, and Gateway callback patterns for secure, transparent survey management.
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue)](https://soliditylang.org/)
 [![Hardhat](https://img.shields.io/badge/Hardhat-Development-orange)](https://hardhat.org/)
+[![Zama FHE](https://img.shields.io/badge/Zama-FHE-purple)](https://www.zama.ai/)
 
 ## 🚀 Live Application
 
@@ -22,16 +23,27 @@ A privacy-preserving employee satisfaction survey platform built with Fully Homo
 
 ## Overview
 
-This platform enables organizations to conduct completely anonymous employee satisfaction surveys where individual responses are encrypted using Fully Homomorphic Encryption. Only aggregated statistics can be revealed, ensuring complete privacy protection for survey participants.
+This platform enables organizations to conduct completely anonymous employee satisfaction surveys where individual responses are encrypted using Fully Homomorphic Encryption. Only aggregated statistics can be revealed, ensuring complete privacy protection for survey participants. The innovative architecture includes timeout protection, automatic refunds, and Gateway callback mechanisms for guaranteed data availability.
 
 ## Key Features
 
+### Privacy & Security
 - **Complete Privacy**: Individual responses encrypted using FHE technology
 - **Anonymous Feedback**: Zero-knowledge architecture protects employee identity
 - **Aggregated Insights**: Statistical summaries without revealing individual data
-- **Blockchain Integrity**: Immutable audit trail on Ethereum
+- **Cryptographic Verification**: FHEVM Oracle signature validation
+
+### Reliability & Safety
+- **Refund Mechanism**: Automatic timeout refunds if Gateway fails
+- **Timeout Protection**: 1-hour timeout prevents permanent fund locking
+- **Gateway Callback Pattern**: Asynchronous decryption with state recovery
 - **Access Control**: Survey creator permissions and lifecycle management
-- **Production Ready**: Complete Hardhat development and deployment workflow
+
+### Production Quality
+- **Blockchain Integrity**: Immutable audit trail on Ethereum
+- **Comprehensive Events**: Security audit logging for all operations
+- **Input Validation**: Strict parameter validation and bounds checking
+- **Overflow Protection**: Type-safe counter and amount management
 
 ## Technology Stack
 
@@ -49,6 +61,54 @@ This platform enables organizations to conduct completely anonymous employee sat
 ### Network
 - **Sepolia Testnet**: Ethereum testing network
 - **Zama fhEVM**: Privacy-preserving computation
+
+## Innovative Architecture Features
+
+### 1. Division Problem Protection
+The platform solves the division problem in homomorphic encryption through random multiplier technique:
+- Random multiplier applied before division
+- Prevents exact value leakage during aggregation
+- Multiplier removed after decryption
+- Cryptographically independent per request
+- See [ARCHITECTURE.md](ARCHITECTURE.md#problem-1-division-problem-protection) for details
+
+### 2. Price Leakage Prevention
+Fuzzy encoding techniques prevent frequency pattern analysis:
+- No plaintext intermediate values exposed
+- All computation on encrypted data
+- Results decrypted only after aggregation
+- Temporal privacy until official resolution
+- Prevents reconstruction attacks
+
+### 3. Gateway Callback Pattern
+Asynchronous decryption with guaranteed recovery:
+- User submits request → Contract records state
+- Gateway decrypts asynchronously → Callback completes
+- Timeout fallback → Automatic refund if Gateway fails
+- Non-blocking operations → Scalable throughput
+- Natural error recovery path
+
+### 4. Timeout Protection
+Prevents permanent fund locking:
+- 1-hour timeout threshold
+- Public trigger mechanism (anyone can claim)
+- Automatic refund on timeout
+- Comprehensive audit trail
+- State-based recovery
+
+### 5. Refund Mechanism
+Two-tier refund system:
+- **Automatic Refund**: Triggered after 1 hour of inactivity
+- **Manual Refund**: Creator/owner intervention for special cases
+- Failure reason tracking
+- One-time prevention with state management
+- Transparent reason logging
+
+## Documentation
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)**: Detailed architectural design including privacy mechanisms, Gateway pattern, and security guarantees
+- **[API.md](API.md)**: Complete smart contract API reference with function signatures, parameters, and examples
+- **[DEPLOYMENT.md](DEPLOYMENT.md)**: Step-by-step deployment and verification instructions
 
 ## Quick Start
 
@@ -125,44 +185,47 @@ employee-privacy-survey/
 ├── package.json                      # Dependencies and scripts
 ├── .env.example                      # Environment template
 ├── README.md                         # This file
-└── DEPLOYMENT.md                     # Detailed deployment guide
+├── ARCHITECTURE.md                   # Detailed architecture guide
+├── API.md                            # Smart contract API documentation
+├── DEPLOYMENT.md                     # Detailed deployment guide
+└── LICENSE                           # MIT License
 ```
 
 ## Smart Contract
 
+The EmployeePrivacyFHE smart contract provides a complete suite of functions for survey management, response collection, and decrypted result retrieval. All functions include comprehensive input validation, access control, and audit trail logging.
+
 ### Core Functions
 
-#### Survey Creation
-```solidity
-function createSurvey(
-    string memory _title,
-    string memory _description,
-    string[] memory _questions,
-    uint256 _durationDays
-) external returns (uint256)
-```
+**Survey Management**
+- `createSurvey()` - Create new survey with questions and duration
+- `closeSurvey()` - Close survey to prevent new responses
+- `publishResults()` - Publish results for decryption
 
-#### Submit Response
-```solidity
-function submitResponse(
-    uint256 _surveyId,
-    uint8[] memory _ratings  // 1-5 scale, encrypted with FHE
-) external
-```
+**Response Handling**
+- `submitResponse()` - Submit encrypted survey responses
+- `hasResponded()` - Check if address has already responded
+- `getEmployeeResponseStatus()` - Get response details
 
-#### Survey Management
-```solidity
-function closeSurvey(uint256 _surveyId) external
-function publishResults(uint256 _surveyId) external
-```
+**Decryption & Results**
+- `requestQuestionAverage()` - Request decryption of question results
+- `processQuestionAverageCallback()` - Gateway callback with decrypted results
+- `getQuestionResult()` - Retrieve decrypted average ratings
 
-#### Query Functions
-```solidity
-function getSurvey(uint256 _surveyId) external view
-function getSurveyQuestions(uint256 _surveyId) external view
-function hasResponded(uint256 _surveyId, address _employee) external view
-function getCurrentSurveyInfo(uint256 _surveyId) external view
-```
+**Refund Mechanism**
+- `triggerTimeoutRefund()` - Trigger automatic timeout refund
+- `requestManualRefund()` - Manual refund for creator/owner
+- `getDecryptionRequestStatus()` - Check refund eligibility
+
+**Query Functions**
+- `getSurvey()` - Get complete survey information
+- `getSurveyQuestions()` - Get all survey questions
+- `getCurrentSurveyInfo()` - Get real-time survey status
+- `getTotalSurveys()` - Get total surveys created
+
+### Complete API Reference
+
+See [API.md](API.md) for detailed function signatures, parameters, return values, and examples for all smart contract functions.
 
 ## Testing
 
